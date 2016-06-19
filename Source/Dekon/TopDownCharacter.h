@@ -3,6 +3,7 @@
 #pragma once
 #include "GameFramework/Pawn.h"
 #include "PaperFlipbookComponent.h"
+#include "PaperFlipbook.h"
 #include "TopDownCharacter.generated.h"
 
 // Direction enum
@@ -54,6 +55,30 @@ public:
 	// The amount of time it takes for the player to change orientation while walking
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
 	float WalkTurnDelay;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* IdleRight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* IdleLeft;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* IdleUp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* IdleDown;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* WalkRight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* WalkLeft;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* WalkUp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPaperFlipbook* WalkDown;
 
 	// Internal Variables
 

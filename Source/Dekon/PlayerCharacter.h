@@ -35,13 +35,25 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
 	float RunSpeed;
 
-	// If the player is running
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
-	bool IsRunning;
-
 	// The amount of time it takes for the player to change orientation while running
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
 	float RunTurnDelay;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPaperFlipbook* RunRight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPaperFlipbook* RunLeft;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPaperFlipbook* RunUp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPaperFlipbook* RunDown;
+
+	// If the player is running
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PC Variables")
+	bool IsRunning;
 
 	UFUNCTION(meta = (BlueprintInternalUseOnly))
 	void ActivateRun();

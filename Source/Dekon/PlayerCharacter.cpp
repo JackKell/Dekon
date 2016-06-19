@@ -11,9 +11,6 @@ APlayerCharacter::APlayerCharacter() {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// The root component of the object of which everything is attached too
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-
 	// The camera spring is created and initalized
 	CameraSpring = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraSpringArm"));
 	CameraSpring->AttachTo(RootComponent);
@@ -21,14 +18,14 @@ APlayerCharacter::APlayerCharacter() {
 	CameraSpring->TargetArmLength = 200.0f;
 	CameraSpring->bEnableCameraLag = false;
 	CameraSpring->CameraLagSpeed = 0.0f;
+	CameraSpring->SetRelativeLocation(FVector(8.0f, 0.0f, 8.0f));
 
 	// Camera is created and initalized
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("GameCamera"));
 	Camera->SetProjectionMode(ECameraProjectionMode::Orthographic);
+	Camera->OrthoWidth = 200;
 	Camera->AttachTo(CameraSpring, USpringArmComponent::SocketName);
-
-	Sprite = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Sprite"));
-	Sprite->AttachTo(RootComponent);
+	Camera->SetRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
 
 	TileSize = 16;
 
