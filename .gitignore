@@ -65,3 +65,6 @@ DerivedDataCache/*
 *.swp
 *.swo
 .ctrlp_cache/
+
+# Visual Studio Database file
+*.VC.opendb
