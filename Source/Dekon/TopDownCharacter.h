@@ -41,65 +41,65 @@ public:
 	// Dev Variables
 
 	// The size of each grid tile in unreal units
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	int TileSize;
 
 	// The walk speed in tiles per second
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	float WalkSpeed;
 
 	// The distance at which the player will snap to the target location
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	float TargetThreshold;
 
 	// The amount of time it takes for the player to change orientation while walking
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	float WalkTurnDelay;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* IdleRight;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* IdleLeft;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* IdleUp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* IdleDown;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* WalkRight;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* WalkLeft;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* WalkUp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* WalkDown;
 
 	// Internal Variables
 
 	// The current direction the player trainer is facing
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TDC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
 	Direction Orientation = Direction::DOWN;
 
 	// The location that the player is moving too
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
 	FVector TargetLocation;
 
 	// The amount the player will have to move to get from the current location to the target location
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
 	FVector DeltaTarget;
 
 	// If the player is moving
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
 	bool IsMoving;
 
 	// If the player is changing orientation
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
 	bool IsTurning;
 
 	// The amount of time the player will have to wait when turning

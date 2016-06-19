@@ -25,34 +25,34 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Trainer Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Components")
 	UCameraComponent* Camera;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Trainer Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Components")
 	USpringArmComponent* CameraSpring;
 	
 	// The run speed in tiles per second
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	float RunSpeed;
 
 	// The amount of time it takes for the player to change orientation while running
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	float RunTurnDelay;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* RunRight;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* RunLeft;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* RunUp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PC Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* RunDown;
 
 	// If the player is running
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PC Variables")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
 	bool IsRunning;
 
 	UFUNCTION(meta = (BlueprintInternalUseOnly))
