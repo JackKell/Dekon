@@ -18,9 +18,8 @@ ATopDownCharacter::ATopDownCharacter()
 
 	TileSize = 16;
 	WalkSpeed = 2;
-	RunSpeed = 6;
 	WalkTurnDelay = 0.075f;
-	RunTurnDelay = 0.06f;
+	
 
 	TargetLocation = GetActorLocation();
 }
@@ -132,21 +131,24 @@ bool ATopDownCharacter::IsAtTargetLocation() {
 	return GetActorLocation().Equals(TargetLocation, TargetThreshold);
 }
 
-void ATopDownCharacter::ActivateRun() {
-	IsRunning = true;
-}
-
-void ATopDownCharacter::DeactivateRun() {
-	IsRunning = false;
-}
-
 void ATopDownCharacter::Turn(Direction Direction) {
 	SetOrientation(Direction);
 	IsTurning = true;
-	if (IsRunning) {
-		TurnDelayTimer = RunTurnDelay;
+	TurnDelayTimer = WalkTurnDelay;
+}
+
+void ATopDownCharacter::OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+{
+	SLOG("%s Entered overlap", *OtherActor->GetName());
+	if (Cast<ATopDownCharacter>(OtherActor)) {
+		SLOG("It's a top down character!");
 	}
-	else {
-		TurnDelayTimer = WalkTurnDelay;
+}
+
+void ATopDownCharacter::OnEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex)
+{
+	SLOG("%s Left overlap", *OtherActor->GetName());
+	if (Cast<ATopDownCharacter>(OtherActor)) {
+		SLOG("It's a top down character!");
 	}
 }

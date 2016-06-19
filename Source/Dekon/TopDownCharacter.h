@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
 #include "GameFramework/Pawn.h"
 #include "PaperFlipbookComponent.h"
 #include "TopDownCharacter.generated.h"
@@ -48,10 +47,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
 	float WalkSpeed;
 
-	// The run speed in tiles per second
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
-	float RunSpeed;
-
 	// The distance at which the player will snap to the target location
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
 	float TargetThreshold;
@@ -59,10 +54,6 @@ public:
 	// The amount of time it takes for the player to change orientation while walking
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
 	float WalkTurnDelay;
-
-	// The amount of time it takes for the player to change orientation while running
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC Variables")
-	float RunTurnDelay;
 
 	// Internal Variables
 
@@ -82,10 +73,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
 	bool IsMoving;
 
-	// If the player is running
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
-	bool IsRunning;
-
 	// If the player is changing orientation
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Variables")
 	bool IsTurning;
@@ -96,31 +83,28 @@ public:
 
 	// Functions
 
-	UFUNCTION(meta = (BlueprintInternalUseOnly))
+	UFUNCTION(meta = (BlueprintInternalUseOnly), Category = "TDC Functions")
 	void MoveUp(float AxisValue);
 
-	UFUNCTION(meta = (BlueprintInternalUseOnly))
+	UFUNCTION(meta = (BlueprintInternalUseOnly), Category = "TDC Functions")
 	void MoveRight(float AxisValue);
 
-	UFUNCTION(BlueprintCallable, Category = "Trainer Functions")
+	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
 	void Move(Direction Direction);
 
-	UFUNCTION(BlueprintCallable, Category = "Trainer Functions")
-	void Turn(Direction Direction);
+	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
+	virtual void Turn(Direction Direction);
 
-	UFUNCTION(meta = (BlueprintInternalUseOnly))
+	UFUNCTION(meta = (BlueprintInternalUseOnly), Category = "TDC Functions")
 	bool IsAtTargetLocation();
 
-	UFUNCTION(BlueprintCallable, Category = "Trainer Functions")
+	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
 	void SetOrientation(Direction NewOrientation);
 
-	UFUNCTION(meta = (BlueprintInternalUseOnly))
-	void ActivateRun();
-
-	UFUNCTION(meta = (BlueprintInternalUseOnly))
-	void DeactivateRun();
-
-	UFUNCTION(BlueprintCallable, Category = "Trainer Functions")
+	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
 	Direction GetOrientation();
-	
+
+	virtual void OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+
+	virtual void OnEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex);
 };
