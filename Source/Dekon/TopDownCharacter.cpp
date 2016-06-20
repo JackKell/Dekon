@@ -14,7 +14,7 @@ ATopDownCharacter::ATopDownCharacter()
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
 	Sprite = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Sprite"));
-	Sprite->AttachTo(RootComponent);
+	Sprite->AttachToComponent(RootComponent, rootAttachmentRule);
 
 	TileSize = 16;
 	WalkSpeed = 2;

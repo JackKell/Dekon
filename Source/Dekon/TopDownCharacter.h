@@ -6,7 +6,6 @@
 #include "PaperFlipbook.h"
 #include "TopDownCharacter.generated.h"
 
-// Direction enum
 UENUM(BlueprintType)
 enum class Direction : uint8 {
 	UP,
@@ -21,20 +20,13 @@ class DEKON_API ATopDownCharacter : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	ATopDownCharacter();
 
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
 	// COMPONENTS
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Components")
 	UPaperFlipbookComponent* Sprite;
 
@@ -81,6 +73,7 @@ public:
 	UPaperFlipbook* WalkDown;
 
 	// Internal Variables
+	FAttachmentTransformRules rootAttachmentRule = FAttachmentTransformRules(EAttachmentRule::KeepRelative, false);
 
 	// The current direction the player trainer is facing
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TDC|Movement")

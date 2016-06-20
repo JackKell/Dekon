@@ -13,7 +13,7 @@ APlayerCharacter::APlayerCharacter() {
 
 	// The camera spring is created and initalized
 	CameraSpring = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraSpringArm"));
-	CameraSpring->AttachTo(RootComponent);
+	CameraSpring->AttachToComponent(RootComponent, rootAttachmentRule);
 	CameraSpring->SetRelativeRotation(FRotator(0, -90.0f, 0));
 	CameraSpring->TargetArmLength = 200.0f;
 	CameraSpring->bEnableCameraLag = false;
@@ -24,7 +24,7 @@ APlayerCharacter::APlayerCharacter() {
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("GameCamera"));
 	Camera->SetProjectionMode(ECameraProjectionMode::Orthographic);
 	Camera->OrthoWidth = 200;
-	Camera->AttachTo(CameraSpring, USpringArmComponent::SocketName);
+	Camera->AttachToComponent(CameraSpring, rootAttachmentRule, USpringArmComponent::SocketName);
 	Camera->SetRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
 
 	TileSize = 16;
