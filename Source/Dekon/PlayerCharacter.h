@@ -5,9 +5,6 @@
 #include "TopDownCharacter.h"
 #include "PlayerCharacter.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class DEKON_API APlayerCharacter : public ATopDownCharacter
 {
@@ -16,15 +13,11 @@ class DEKON_API APlayerCharacter : public ATopDownCharacter
 public:
 	APlayerCharacter();
 
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Components")
 	UCameraComponent* Camera;
 
@@ -39,6 +32,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Movement")
 	float RunTurnDelay;
 
+	// If the player is running
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement|Debug")
+	bool IsRunning;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* RunRight;
 
@@ -51,13 +48,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TDC|Animation")
 	UPaperFlipbook* RunDown;
 
-	// If the player is running
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC|Movement")
-	bool IsRunning;
-
+	// Sets is running to true
 	UFUNCTION(meta = (BlueprintInternalUseOnly))
 	void ActivateRun();
 
+	// Sets is running to false
 	UFUNCTION(meta = (BlueprintInternalUseOnly))
 	void DeactivateRun();
 };

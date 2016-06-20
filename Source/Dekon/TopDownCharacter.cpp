@@ -5,42 +5,30 @@
 
 
 // Sets default values
-ATopDownCharacter::ATopDownCharacter()
-{
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ATopDownCharacter::ATopDownCharacter() {
 	PrimaryActorTick.bCanEverTick = true;
 
-	// The root component of the object of which everything is attached too
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-
 	Sprite = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Sprite"));
-	Sprite->AttachToComponent(RootComponent, rootAttachmentRule);
+
+	RootComponent = Sprite;
 
 	TileSize = 16;
 	WalkSpeed = 2;
 	WalkTurnDelay = 0.075f;
+	TargetThreshold = 1.0f;
 	
-
 	TargetLocation = GetActorLocation();
 }
 
-// Called when the game starts or when spawned
-void ATopDownCharacter::BeginPlay()
-{
+void ATopDownCharacter::BeginPlay() {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
-void ATopDownCharacter::Tick( float DeltaTime )
-{
+void ATopDownCharacter::Tick( float DeltaTime ) {
 	Super::Tick( DeltaTime );
-
 }
 
-// Called to bind functionality to input
-void ATopDownCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
-{
+void ATopDownCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
 	Super::SetupPlayerInputComponent(InputComponent);
 }
 
@@ -137,8 +125,7 @@ void ATopDownCharacter::Turn(Direction Direction) {
 	TurnDelayTimer = WalkTurnDelay;
 }
 
-void ATopDownCharacter::OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
-{
+void ATopDownCharacter::OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult) {
 	SLOG("%s Entered overlap", *OtherActor->GetName());
 	if (Cast<ATopDownCharacter>(OtherActor)) {
 		SLOG("It's a top down character!");

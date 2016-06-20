@@ -3,12 +3,7 @@
 #include "Dekon.h"
 #include "PlayerCharacter.h"
 
-
 APlayerCharacter::APlayerCharacter() {
-	RunTurnDelay = 0.06f;
-	RunSpeed = 6;
-
-	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// The camera spring is created and initalized
@@ -27,18 +22,11 @@ APlayerCharacter::APlayerCharacter() {
 	Camera->AttachToComponent(CameraSpring, rootAttachmentRule, USpringArmComponent::SocketName);
 	Camera->SetRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
 
-	TileSize = 16;
-
-	WalkSpeed = 2;
-
 	RunSpeed = 6;
-
-	WalkTurnDelay = 0.075f;
 	RunTurnDelay = 0.06f;
 
 	TargetLocation = GetActorLocation();
 
-	// Take control the default player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
