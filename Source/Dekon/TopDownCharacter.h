@@ -26,13 +26,13 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
 	UFUNCTION(meta = (BlueprintInternalUseOnly), Category = "TDC Functions")
-	void MoveUp(float AxisValue);
+	virtual void MoveUp(float AxisValue);
 
 	UFUNCTION(meta = (BlueprintInternalUseOnly), Category = "TDC Functions")
-	void MoveRight(float AxisValue);
+	virtual void MoveRight(float AxisValue);
 
 	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
-	void Move(Direction Direction);
+	virtual void Move(Direction Direction);
 
 	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
 	virtual void Turn(Direction Direction);
@@ -46,9 +46,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TDC Functions")
 	Direction GetOrientation();
 
-	virtual void OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+	bool Trace(UWorld* World, AActor* ActorToIgnore, const FVector& Start, const FVector& End, 
+		FHitResult& Hitout, ECollisionChannel = ECC_Pawn, bool ReturnPhysMat = false);
 
-	virtual void OnEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex);
+	virtual void OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, 
+		UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+
+	virtual void OnEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, 
+		UPrimitiveComponent * OtherComp, int32 OtherBodyIndex);
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Components")

@@ -13,9 +13,10 @@ class DEKON_API APlayerCharacter : public ATopDownCharacter
 public:
 	APlayerCharacter();
 
-	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+
+	virtual void Turn(Direction Direction) override;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TDC Components")

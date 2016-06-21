@@ -24,22 +24,55 @@ APlayerCharacter::APlayerCharacter() {
 
 	RunSpeed = 6;
 	RunTurnDelay = 0.06f;
-
 	TargetLocation = GetActorLocation();
-
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
-}
-
-void APlayerCharacter::BeginPlay() {
-	Super::BeginPlay();
 }
 
 void APlayerCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
+	if (IsTurning) {
+		TurnDelayTimer -= DeltaSeconds;
+		if (TurnDelayTimer <= 0) {
+			IsTurning = false;
+			TurnDelayTimer = 0;
+		}
+		return;
+	}
+
+	if (IsMoving) {
+		FVector DeltaLocation = FVector(0, 0, 0);
+		if (IsRunning) {
+			DeltaLocation = DeltaTarget * RunSpeed * DeltaSeconds;
+		}
+		else {
+			DeltaLocation = DeltaTarget * WalkSpeed * DeltaSeconds;
+		}
+		SetActorLocation(GetActorLocation() + DeltaLocation);
+
+		if (IsAtTargetLocation()) {
+			SetActorLocation(TargetLocation);
+			IsMoving = false;
+		}
+	}
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
 	Super::SetupPlayerInputComponent(InputComponent);
+	InputComponent->BindAxis("MoveUp", this, &APlayerCharacter::MoveUp);
+	InputComponent->BindAxis("MoveRight", this, &APlayerCharacter::MoveRight);
+	InputComponent->BindAction("Run", IE_Pressed, this, &APlayerCharacter::ActivateRun);
+	InputComponent->BindAction("Run", IE_Released, this, &APlayerCharacter::DeactivateRun);
+}
+
+void APlayerCharacter::Turn(Direction Direction) {
+	SetOrientation(Direction);
+	IsTurning = true;
+	if (IsRunning) {
+		TurnDelayTimer = RunTurnDelay;
+	}
+	else {
+		TurnDelayTimer = WalkTurnDelay;
+	}
 }
 
 void APlayerCharacter::ActivateRun() {

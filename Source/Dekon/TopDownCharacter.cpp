@@ -3,13 +3,10 @@
 #include "Dekon.h"
 #include "TopDownCharacter.h"
 
-
-// Sets default values
 ATopDownCharacter::ATopDownCharacter() {
 	PrimaryActorTick.bCanEverTick = true;
 
 	Sprite = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Sprite"));
-
 	RootComponent = Sprite;
 
 	TileSize = 16;
@@ -57,8 +54,7 @@ void ATopDownCharacter::MoveUp(float AxisValue) {
 	}
 }
 
-void ATopDownCharacter::MoveRight(float AxisValue)
-{
+void ATopDownCharacter::MoveRight(float AxisValue) {
 	if (!IsMoving && !IsTurning) {
 		if (AxisValue < 0) {
 			if (GetOrientation() == Direction::LEFT) {
@@ -125,6 +121,24 @@ void ATopDownCharacter::Turn(Direction Direction) {
 	TurnDelayTimer = WalkTurnDelay;
 }
 
+bool Trace(UWorld* World, AActor* ActorToIgnore, const FVector& Start, const FVector& End, FHitResult& Hitout, ECollisionChannel CollisionChannel = ECC_Pawn, bool ReturnPhysMat = false) {
+	if (!World) {
+		return false;
+	}
+
+	FCollisionQueryParams TraceParams(FName(TEXT("Core Trace")), true, ActorToIgnore);
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = ReturnPhysMat;
+
+	TraceParams.AddIgnoredActor(ActorToIgnore);
+
+	Hitout = FHitResult(ForceInit);
+
+	World->LineTraceSingleByChannel(Hitout, Start, End, CollisionChannel, TraceParams);
+
+	return (Hitout.GetActor() != NULL);
+}
+
 void ATopDownCharacter::OnBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult) {
 	SLOG("%s Entered overlap", *OtherActor->GetName());
 	if (Cast<ATopDownCharacter>(OtherActor)) {
@@ -132,8 +146,7 @@ void ATopDownCharacter::OnBeginOverlap(UPrimitiveComponent * OverlappedComponent
 	}
 }
 
-void ATopDownCharacter::OnEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex)
-{
+void ATopDownCharacter::OnEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex) {
 	SLOG("%s Left overlap", *OtherActor->GetName());
 	if (Cast<ATopDownCharacter>(OtherActor)) {
 		SLOG("It's a top down character!");
